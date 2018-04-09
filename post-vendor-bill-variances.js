@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Post Vendor Bill Variances
 // @namespace    https://system.na2.netsuite.com/
-// @version      0.1
+// @version      0.2
 // @description  Enhancements to Post Vendor Bill Variances page
 // @author       You
 // @match        https://system.na2.netsuite.com/app/accounting/transactions/vendorbillvariance/postvendorbillvariances.nl?whence=
