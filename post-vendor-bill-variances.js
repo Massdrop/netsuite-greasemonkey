@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Post Vendor Bill Variances
 // @namespace    https://system.na2.netsuite.com/
-// @version      0.2
+// @version      0.1
 // @description  Enhancements to Post Vendor Bill Variances page
 // @author       You
 // @match        https://system.na2.netsuite.com/app/accounting/transactions/vendorbillvariance/postvendorbillvariances.nl?whence=
@@ -10,8 +10,6 @@
 
 (function() {
     'use strict';
-    
-    // TEST CHANGE
 
     // lifted from the inspecting the JS on the Post Vendor Bill Variances page
     function setMachineLineState(linenum, state) {
