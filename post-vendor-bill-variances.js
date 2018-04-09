@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         Post Vendor Bill Variances XXX XXX
+// @name         Post Vendor Bill Variances
 // @namespace    https://system.na2.netsuite.com/
 // @version      0.1
 // @description  Enhancements to Post Vendor Bill Variances page
