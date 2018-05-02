@@ -1,6 +1,7 @@
 // ==UserScript==
 // @name         Reconcile Account Statement
 // @require      https://cdn.jsdelivr.net/npm/lodash@4.17.5/lodash.min.js
+// @require      https://momentjs.com/downloads/moment.min.js
 // @namespace    https://system.na2.netsuite.com/
 // @version      0.1
 // @description  Enhancements to Reconcile Account Statement page
@@ -43,8 +44,8 @@
         e.preventDefault();
 
         // get date bounds
-        let start = jQuery('div[data-view-id=start-date]').data('date');
-        let finish = jQuery('div[data-view-id=end-date]').data('date');
+        let start = moment(jQuery('div[data-view-id=start-date]').find("input[type=text]").val(),'MM/DD/YYYY').format('YYYY-MM-DD');
+        let finish = moment(jQuery('div[data-view-id=end-date]').data('date')).format('YYYY-MM-DD');
 
         // retrieve data and copy to clipboard
         if(start && finish) {
@@ -60,15 +61,26 @@
                 skip: 0,
                 pageSize: 10000
             }), function(data) {
+                console.log("done");
                 const clip = [];
                 const cols = ['date', 'transactionType', 'transactionNumber', 'payee', 'memo', 'amount'];
                 clip.push(cols.join('\t'));
                 _.forEach(data.resultSubset, (r) => {
-                    clip.push(_.at(r, cols).join('\t'));
+                    clip.push([
+                        r.date,
+                        r.transactionType.displayName,
+                        r.transactionNumber,
+                        r.payee,
+                        r.memo,
+                        r.amount
+                    ].join('\t'));
                 });
                 GM_setClipboard(clip.join('\n'), 'text');
             });
+        } else {
+            console.error("Could not detect start/end date.", start, end);
         }
+
     });
 
     let $actions = jQuery('<div class="n-widget" style="font-size:10px;"><span>Actions: </span></div>');
